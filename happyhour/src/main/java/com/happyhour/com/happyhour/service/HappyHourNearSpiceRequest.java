@@ -13,6 +13,6 @@ public class HappyHourNearSpiceRequest extends BaseHappyHourUserSpiceRequest {
 
     @Override
     public Users loadDataFromNetwork() {
-        return getService().searchNear(this.userId);
+        return getService().searchNear(getUserId());
     }
 }

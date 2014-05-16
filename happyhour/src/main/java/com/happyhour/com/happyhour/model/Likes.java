@@ -3,7 +3,7 @@ package com.happyhour.com.happyhour.model;
 /**
  * Created by fsiu on 5/16/14.
  */
-public class Criteria {
+public class Likes {
 
     private String drinking;
     private String listening;

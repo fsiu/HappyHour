@@ -13,6 +13,6 @@ public class HappyHourCheckinSpiceRequest extends BaseHappyHourUserSpiceRequest 
 
     @Override
     public Users loadDataFromNetwork() {
-        return getService().checkin(this.userId);
+        return getService().checkin(getUserId());
     }
 }

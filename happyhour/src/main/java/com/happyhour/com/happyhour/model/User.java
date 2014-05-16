@@ -20,7 +20,7 @@ public class User {
 
     private String photo;
 
-    private Criteria criteria;
+    private Likes likes;
 
     public long getUserId() {
         return userId;
@@ -62,11 +62,7 @@ public class User {
         this.photo = photo;
     }
 
-    public Criteria getCriteria() {
-        return criteria;
-    }
-
-    public void setCriteria(Criteria criteria) {
-        this.criteria = criteria;
+    public Likes getLikes() {
+        return likes;
     }
 }

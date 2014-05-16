@@ -7,7 +7,7 @@ import com.happyhour.com.happyhour.model.Users;
  */
 public abstract class BaseHappyHourUserSpiceRequest extends BaseSpiceRequest <Users, HappyHour>{
 
-    protected final String userId;
+    final String userId;
 
     public BaseHappyHourUserSpiceRequest(final String userId) {
         super(Users.class, HappyHour.class);
@@ -17,5 +17,9 @@ public abstract class BaseHappyHourUserSpiceRequest extends BaseSpiceRequest <Us
     @Override
     public Object getCacheKey() {
         return this.hashCode();
+    }
+
+    String getUserId() {
+        return this.userId;
     }
 }
