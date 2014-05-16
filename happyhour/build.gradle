@@ -1,4 +1,19 @@
+apply plugin: 'android-sdk-manager'
 apply plugin: 'android'
+
+def devBuildName = "dev"
+def releaseBuildName = "release"
+
+def profileRootSrc = projectDir.toString() + File.separator + "src" +File.separator + "main" + File.separator + "profiles"
+def devRootSrc = profileRootSrc + File.separator + devBuildName
+def releaseRootSrc = profileRootSrc + File.separator + releaseBuildName
+
+def resPath = File.separator + "res"
+def resourcesPath = File.separator + "resources"
+def assetsPath = File.separator + "assets"
+
+println devBuildName + " files at :" + devRootSrc
+println releaseBuildName + " files at :" + releaseRootSrc
 
 android {
     compileSdkVersion 19
@@ -11,14 +26,56 @@ android {
         versionName "1.0"
     }
     buildTypes {
+        debug {
+            packageNameSuffix "."+devBuildName
+            versionNameSuffix "-"+devBuildName.toUpperCase()
+        }
         release {
+            zipAlign true
             runProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
+    }
+    sourceSets {
+        debug {
+            resources.srcDirs = [devRootSrc + resourcesPath]
+            res.srcDirs = [devRootSrc + resPath]
+            assets.srcDirs = [devRootSrc + assetsPath]
+        }
+        release {
+            resources.srcDirs = [releaseRootSrc + resourcesPath]
+            res.srcDirs = [releaseRootSrc + resPath]
+            assets.srcDirs = [devRootSrc + assetsPath]
+        }
+    }
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/DEPENDENCIES'
     }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:19.+'
+
+    compile 'com.google.guava:guava:17.0'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.3.3'
+    compile 'com.fasterxml.jackson.core:jackson-annotations:2.3.3'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.3.3'
+
+    compile 'com.netflix.rxjava:rxjava-core:0.17.6'
+    compile 'com.netflix.rxjava:rxjava-android:0.17.6'
+
+    compile 'com.squareup.okhttp:okhttp:1.5.3'
+    compile 'com.squareup.picasso:picasso:2.2.0'
+    compile 'com.squareup.retrofit:retrofit:1.5.1'
+    compile 'com.squareup.retrofit:converter-jackson:1.5.1'
+    compile 'com.octo.android.robospice:robospice:1.4.12'
+    compile 'com.octo.android.robospice:robospice-retrofit:1.4.12'
+
+    compile 'com.jakewharton:butterknife:4.0.1'
+
 }
